@@ -1,5 +1,7 @@
 import React from "react";
 import uuid from "react-uuid";
+import { TextField, Button, Grid } from "@material-ui/core";
+import "./TodoForm.css";
 
 class TodoForm extends React.Component {
   constructor(props) {
@@ -26,15 +28,38 @@ class TodoForm extends React.Component {
     return (
       <div className="TodoForm">
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="task"
-            placeholder="Add a new task..."
-            value={this.state.task}
-            onChange={handleChange}
-          />
-          <button>Add Todo</button>
-          <button onClick={this.props.clearCompleted}>Clear Completed</button>
+          <Button
+            onClick={this.props.clearCompleted}
+            variant="outlined"
+            color="secondary"
+          >
+            Clear Completed
+          </Button>
+          <Grid container direction="row" justify="center" alignItems="center">
+            <TextField
+              type="text"
+              name="task"
+              label="New Task"
+              variant="outlined"
+              placeholder="Add a new task..."
+              value={this.state.task}
+              onChange={handleChange}
+              className="form-text"
+              size="small"
+              margin="normal"
+              fullWidth
+            />
+            <Button
+              variant="outlined"
+              color="primary"
+              type="submit"
+              margin="normal"
+              classname="btn-submit"
+              size="medium"
+            >
+              Add Todo
+            </Button>
+          </Grid>
         </form>
       </div>
     );

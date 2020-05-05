@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "@material-ui/core";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
@@ -59,10 +60,10 @@ class App extends React.Component {
     };
 
     return (
-      <div>
-        <TodoList todos={this.state.todos} setTodo={setTodo} />
+      <Container maxWidth="md" style={{ textAlign: "center" }}>
         <TodoForm handleTodo={handleTodo} clearCompleted={clearCompleted} />
-      </div>
+        <TodoList todos={this.state.todos} setTodo={setTodo} />
+      </Container>
     );
   }
 }
