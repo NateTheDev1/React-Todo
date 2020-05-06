@@ -23,6 +23,7 @@ class App extends React.Component {
           completed: false,
         },
       ],
+      searchTerm: "",
     };
   }
 
@@ -59,10 +60,22 @@ class App extends React.Component {
       });
     };
 
+    const handleSearch = (term) => {
+      this.setState({ searchTerm: term });
+    };
+
     return (
       <Container maxWidth="md" style={{ textAlign: "center" }}>
-        <TodoForm handleTodo={handleTodo} clearCompleted={clearCompleted} />
-        <TodoList todos={this.state.todos} setTodo={setTodo} />
+        <TodoForm
+          handleTodo={handleTodo}
+          clearCompleted={clearCompleted}
+          handleSearch={handleSearch}
+        />
+        <TodoList
+          todos={this.state.todos}
+          setTodo={setTodo}
+          searchTerm={this.state.searchTerm}
+        />
       </Container>
     );
   }

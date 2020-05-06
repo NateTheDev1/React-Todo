@@ -1,6 +1,6 @@
 import React from "react";
 import uuid from "react-uuid";
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Button, Grid, Paper, Divider } from "@material-ui/core";
 import "./TodoForm.css";
 
 class TodoForm extends React.Component {
@@ -10,6 +10,7 @@ class TodoForm extends React.Component {
       task: "",
       id: uuid(),
       completed: false,
+      search: "",
     };
   }
 
@@ -25,9 +26,95 @@ class TodoForm extends React.Component {
       this.setState({ task: "", id: uuid(), completed: false });
     };
 
+    const handleSearch = (e) => {
+      e.preventDefault();
+      this.props.handleSearch(this.state.search);
+    };
+
+    const handleClearSearch = () => {
+      this.props.handleSearch("");
+      this.setState({ search: "" });
+    };
+
     return (
       <div className="TodoForm">
-        <form onSubmit={handleSubmit}>
+        <Paper elevation={3} style={{ padding: "2%", boxSizing: "border-box" }}>
+          <form onSubmit={handleSubmit}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <TextField
+                type="text"
+                name="task"
+                label="New Task"
+                variant="outlined"
+                placeholder="Add a new task..."
+                value={this.state.task}
+                onChange={handleChange}
+                className="form-text"
+                size="small"
+                margin="normal"
+                fullWidth
+              />
+              <Button
+                variant="outlined"
+                color="primary"
+                type="submit"
+                margin="normal"
+                classname="btn-submit"
+                size="medium"
+              >
+                Add Todo
+              </Button>
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <TextField
+                type="text"
+                name="search"
+                label="Search"
+                variant="outlined"
+                placeholder="Add a new task..."
+                value={this.state.search}
+                onChange={handleChange}
+                className="form-text"
+                size="small"
+                margin="normal"
+                fullWidth
+                style={{ marginTop: "5%" }}
+              />
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleSearch}
+                margin="normal"
+                classname="btn-submit"
+                size="medium"
+                style={{ marginBottom: "3%" }}
+              >
+                Search
+              </Button>
+              {this.state.search.length > 0 ? (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleClearSearch}
+                  margin="normal"
+                  classname="btn-submit"
+                  size="medium"
+                >
+                  Clear Search
+                </Button>
+              ) : null}
+            </Grid>
+          </form>
           <Button
             onClick={this.props.clearCompleted}
             variant="outlined"
@@ -35,32 +122,7 @@ class TodoForm extends React.Component {
           >
             Clear Completed
           </Button>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <TextField
-              type="text"
-              name="task"
-              label="New Task"
-              variant="outlined"
-              placeholder="Add a new task..."
-              value={this.state.task}
-              onChange={handleChange}
-              className="form-text"
-              size="small"
-              margin="normal"
-              fullWidth
-            />
-            <Button
-              variant="outlined"
-              color="primary"
-              type="submit"
-              margin="normal"
-              classname="btn-submit"
-              size="medium"
-            >
-              Add Todo
-            </Button>
-          </Grid>
-        </form>
+        </Paper>
       </div>
     );
   }
