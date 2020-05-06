@@ -101,20 +101,20 @@ class TodoForm extends React.Component {
               >
                 Search
               </Button>
-              {this.state.search.length > 0 ? (
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={handleClearSearch}
-                  margin="normal"
-                  classname="btn-submit"
-                  size="medium"
-                >
-                  Clear Search
-                </Button>
-              ) : null}
             </Grid>
           </form>
+          {this.state.search.length > 0 ? (
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={handleClearSearch}
+              margin="normal"
+              classname="btn-submit"
+              size="medium"
+            >
+              Clear Search
+            </Button>
+          ) : null}
           <Button
             onClick={this.props.clearCompleted}
             variant="outlined"
