@@ -1,5 +1,6 @@
 import React from "react";
 import Todo from "./Todo";
+import { List } from "@material-ui/core";
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -8,11 +9,11 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <div>
+      <List>
         {this.props.todos.map((t) => (
           <Todo todo={t} setTodo={this.props.setTodo} />
         ))}
-      </div>
+      </List>
     );
   }
 }
